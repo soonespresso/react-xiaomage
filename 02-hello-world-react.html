@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02 Hello World React</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <!-- Quickly Try JSX -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!-- My Code -->
+  <script type="text/babel">
+
+    let message = 'Hello World';
+    render();
+
+    function btnClick() {
+      message = 'Hello React';
+      console.log('btnClick', message);
+      // 重新渲染
+      render();
+    }
+
+    function render() {
+      // react-dom.development.js
+      ReactDOM.render(
+        // jsx：只能有一个根标签
+        <div>
+          <h2>{message}</h2>
+          <button onClick={btnClick}>Change Hello</button>
+        </div>
+        ,
+        document.getElementById('app')
+      );
+    }
+  </script>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+
+</html>

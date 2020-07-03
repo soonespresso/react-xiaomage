@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01 Hello World</title>
+</head>
+<body>
+  <h2 class="title">Hello World</h2>
+  <button class="btn" onclick="fun(event)">Change Hello</button>
+  <script>
+    function fun(event) {
+      console.log(event);
+    }
+    const message = 'Hello World';
+    const titleEl = document.getElementsByClassName('title')[0];
+    titleEl.innerHTML = message;
+
+    const btnEl = document.getElementsByClassName('btn')[0];
+    btnEl.addEventListener('click', e => {
+      titleEl.innerHTML = 'Hello React';
+      console.log('Click');
+    });
+  </script>
+</body>
+</html>
