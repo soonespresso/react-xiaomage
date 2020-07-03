@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Class</title>
+</head>
+<body>
+  <script>
+    // ES5
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+
+    Person.prototype.running = function() {
+      console.log(this);
+      console.log(this.name, this.age, 'running');
+    }
+
+    // 隐示绑定
+    var p = new Person('Darwin', 31);
+    console.log(p.name, p.age);
+    p.running();
+
+
+    // ES6
+    class Student {
+
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      running() {
+        console.log(this);
+        console.log(this.name, this.age, 'running');
+      }
+    }
+    const stu = new Student('Newton', 30);
+    console.log(stu.name, stu.age);
+    stu.running();
+
+
+    // this 绑定题目
+    const func = p.running;
+    func();
+    let func1 = stu.running;
+    try {
+      func1();  
+    } catch (error) {
+      console.error(error);
+    }
+    
+    var obj = {
+      name: 'Turing',
+      age: 40
+    }
+    func1.call(obj);
+
+
+    // 重新赋值 func1
+    func1 = func1.bind(obj);
+    func1();
+  </script>
+</body>
+</html>
