@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSX Movie List</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="./react/react.development.js" crossorigin></script>
+  <script src="./react/react-dom.development.js" crossorigin></script>
+  <script src="./react/babel.min.js"></script>
+  <script type="text/babel">
+
+    class App extends React.Component {
+
+      constructor() {
+        super();
+
+        this.state = {
+          title: '电影列表',
+          movies: [
+            '大话西游',
+            '盗梦空间',
+            '星际穿越',
+            '流浪地球'
+          ]
+        }
+      }
+
+      render() {
+
+        const liList = [];
+        let i = 0;
+        for (const movie of this.state.movies) {
+          liList.push(<li key={i++}>{movie}</li>);
+        }
+
+        return (
+          <div>
+            <h2>{this.state.title + '1'}</h2>
+            <ul>
+              {liList}
+            </ul>
+            <h2>{this.state.title + '2'}</h2>
+            <ul>
+              {// 表达式
+                this.state.movies.map((movie, index) => <li key={index}>{movie}</li>)
+              }
+            </ul>
+          </div>
+        )
+      }
+
+    }
+
+    ReactDOM.render(<App/>, document.getElementById('app'));
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSX If</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="./react/react.development.js" crossorigin></script>
+  <script src="./react/react-dom.development.js" crossorigin></script>
+  <script src="./react/babel.min.js"></script>
+  <script type="text/babel">
+
+    class App extends React.Component {
+
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          isLogin: true
+        }
+      }
+
+      render() {
+
+        const { isLogin } = this.state
+
+        // 方案1：通过 if 判断
+        // （逻辑代码非常多的情况）
+
+        let welcome = <h2>Please login!</h2>
+        let btnTitle = 'Login';
+        if (this.state.isLogin) {
+          welcome = <h2>Welcome back!</h2>
+          btnTitle = 'Exit'
+        }
+
+        return (
+          <div>
+            {welcome}
+            {/* 方案2：三元运算符 */}
+            {/* <button>{btnTitle}</button> */}
+            <button onClick={ e => this.loginClick() }>{ isLogin ? 'Exit' : 'Login' }</button>
+            <hr/>
+            {/* 方案3：逻辑与 && */}
+            {/* {isLogin ? <h3>Hello, Darwin!</h3> : null} */}
+            {isLogin && <h3>Hello, Darwin!</h3>}
+          </div>
+        )
+      }
+
+      loginClick() {
+        this.setState({
+          isLogin: !this.state.isLogin
+        })
+      }
+    }
+
+    ReactDOM.render(<App/>, document.getElementById('app'));
+  </script>
+  
+</body>
+</html>

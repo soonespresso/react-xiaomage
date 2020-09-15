@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSX Case Exercises</title>
+  <style>
+    table {
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px 16px;
+      text-align: center;
+    }
+
+    th {
+      background: #aaa;
+      border-color: #999;
+    }
+
+    .count {
+      margin: 0 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="./react/react.development.js" crossorigin></script>
+  <script src="./react/react-dom.development.js" crossorigin></script>
+  <script src="./react/babel.min.js"></script>
+  <script src="./utils/format-utils.js"></script>
+  <script type="text/babel">
+    class App extends React.Component {
+
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          books: [
+            {
+              id: 1,
+              name: "《算法导论》",
+              date: "2006-9",
+              price: 85.0,
+              count: 1,
+            },
+            {
+              id: 2,
+              name: "《UNIX编程艺术》",
+              date: "2006-2",
+              price: 59.0,
+              count: 1,
+            },
+            {
+              id: 3,
+              name: "《编程珠玑》",
+              date: "2008-10",
+              price: 39.0,
+              count: 1,
+            },
+            {
+              id: 4,
+              name: "《代码大全》",
+              date: "2006-3",
+              price: 128.0,
+              count: 1,
+            },
+          ],
+        };
+      }
+
+      renderBooks() {
+        return (
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>书籍名称</th>
+                  <th>出版日期</th>
+                  <th>价格</th>
+                  <th>购买数量</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  this.state.books.map((book, index) => {
+                    return (
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>{book.name}</td>
+                        <td>{book.date}</td>
+                        <td>{formatPrice(book.price)}</td>
+                        <td>
+                          <button onClick={e => this.increaseCount(index, -1)} disabled={book.count === 0}>-</button>
+                          <span className="count">{book.count}</span>
+                          <button onClick={e => this.increaseCount(index, +1)}>+</button>
+                        </td>
+                        <td><button onClick={e => this.removeBook(index)}>移除</button></td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </table>
+            <h2>
+              总价格：{this.getTotalPrice()}元
+            </h2>
+          </div>
+        );
+      }
+
+      renderEmpty() {
+        return (
+          <h2>购物车为空</h2>
+        );
+      }
+
+      render() {
+        return this.state.books.length ? this.renderBooks() : this.renderEmpty();
+      }
+
+      removeBook(index) {
+        console.log(index);
+        // index
+        // indey
+        // indez
+        // React 设计原则：state 中的数据的不可变性；
+        this.setState({
+          books: this.state.books.filter((_, indey) => index !== indey)
+        })
+      }
+
+      getTotalPrice() {
+        /* let totalPrice = 0;
+        for (const book of this.state.books) {
+          totalPrice += book.count * book.price;
+        } */
+        return formatPrice(this.state.books.reduce((initialValue, book) => initialValue + book.price * book.count, 0));
+      }
+
+      increaseCount(index, value) {
+        const books = [...this.state.books];
+        books[index].count += value;
+        // books[index].count < 1 && (books[index].count = 1);
+        this.setState({ books });
+      }
+    }
+
+    ReactDOM.render(<App />, document.getElementById("app"));
+  </script>
+</body>
+
+</html>

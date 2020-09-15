@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSX Syntax Embedded Expression</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="./react/react.development.js" crossorigin></script>
+  <script src="./react/react-dom.development.js" crossorigin></script>
+  <script src="./react/babel.min.js"></script>
+  <script type="text/babel">
+
+    class App extends React.Component {
+
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          firstname: 'Charles',
+          lastname: 'Darwin',
+          isLogin: true
+        }
+      }
+
+      render() {
+
+        const { firstname, lastname, isLogin } = this.state;
+
+        return (
+          <div>
+            {/* 运算符表达式 */}
+            <h2>{ firstname + ' ' + lastname }</h2>
+            <h2>{20 + 50}</h2>
+
+            {/* 三元表达式 */}
+            <h2>{ isLogin ? 'Welcome' : 'Login in'}</h2>
+
+            {/* 进行函数调用 */}
+            <h2>{ this.getFullName() }</h2>
+          </div>
+        )
+      }
+
+      getFullName() {
+        return this.state.firstname + ' ' + this.state.lastname;
+      }
+    }
+
+    ReactDOM.render(<App/>, document.getElementById('app'));
+  </script>
+  
+</body>
+</html>

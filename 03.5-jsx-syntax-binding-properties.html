@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSX Binding Properties</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="./react/react.development.js" crossorigin></script>
+  <script src="./react/react-dom.development.js" crossorigin></script>
+  <script src="./react/babel.min.js"></script>
+  <script type="text/babel">
+
+    function getImageBySizes(url, size) {
+      return url + `?param=${size}y${size}`;
+    }
+
+    class App extends React.Component {
+
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          title: 'MY TITLE',
+          imgUrl: 'http://p1.music.126.net/2dIhCSnv1ZCZM_1OmhB8vA==/109951164359889372.jpg',
+          link: 'https://www.baidu.com/',
+          active: true
+        }
+      }
+
+      render() {
+
+        const { title, imgUrl, link, active } = this.state;
+
+        // jsx 关键字：class、for... 等
+        return (
+          <div>
+            {/* 绑定 普通属性 */}
+            <h2 title={title}>My Title</h2>
+            <img src={getImageBySizes(imgUrl, 140)} alt="React"/>
+            <a href={link} target="_blank">Baidu</a>
+
+            {/* 绑定 class */}
+            {/* className -> class */}
+            <div className="box title">I am a div element.</div>
+            <div className={'box title' + (active ? ' active' : '')}>I am a div element, too.</div>
+            {/* htmlFor -> for */}
+            <label htmlFor=""></label>
+
+            {/* 绑定 style */}
+            <div style={{ color: 'royalblue', fontWeight: 600 }}>I am a div element, binding style.</div>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<App/>, document.getElementById('app'));
+  </script>
+  
+</body>
+</html>

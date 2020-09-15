@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSX v-show</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="./react/react.development.js" crossorigin></script>
+  <script src="./react/react-dom.development.js" crossorigin></script>
+  <script src="./react/babel.min.js"></script>
+  <script type="text/babel">
+
+    class App extends React.Component {
+
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          isLogin: true
+        }
+      }
+
+      render() {
+
+        const { isLogin } = this.state
+        let titleDisplayValue = isLogin ? 'block' : 'none'
+
+        return (
+          <div>
+            <h2 style={{ display: titleDisplayValue }}>Hello, Darwin</h2>
+            <button onClick={() => this.loginClick()}>{isLogin ? 'Exit' : 'Login'}</button>
+          </div>
+        )
+      }
+
+      loginClick() {
+        this.setState({
+          isLogin: !this.state.isLogin
+        })
+      }
+    }
+
+    ReactDOM.render(<App/>, document.getElementById('app'));
+  </script>
+  
+</body>
+</html>
